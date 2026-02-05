@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Love 💛</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #FFD54F, #FFEE58);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      color: #4a3b00;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 22px;
+      padding: 30px 25px;
+      text-align: center;
+      max-width: 340px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      animation: fadeIn 1s ease;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      background: #FFD600;
+      color: #4a3b00;
+      font-weight: 600;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.08);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .confetti span {
+      position: absolute;
+      animation: fall 4s linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px); opacity: 1; }
+      100% { transform: translateY(600px); opacity: 0; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="step1">
+    <h1>My love 💛</h1>
+    <p>Before we go any further, I need to know…</p>
+    <p><strong>Do you love me?</strong></p>
+    <div class="buttons">
+      <button onclick="nextStep(2)">Yes 😊</button>
+      <button onclick="nextStep(2)">Yes 😁</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="step2">
+    <p>
+      This is our <strong>third Valentine’s</strong> together, and even though we haven’t yet been able to spend it together,
+      being together is the one thing I appreciate the most.
+    </p>
+    <p>
+      I love you so much, <strong>Wilhermina</strong>.
+      Through the tough days and the good days, there’s no one I’d rather lay on besides you.
+    </p>
+    <p><strong>Are you ready for the most important question of the month?</strong></p>
+    <div class="buttons">
+      <button onclick="nextStep(3)">Yes 💛</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="step3">
+    <h1>My beautiful sweetheart 💫</h1>
+    <p><strong>Will you be my Valentine?</strong></p>
+    <div class="buttons">
+      <button onclick="finalStep()">Yes!! 🎉</button>
+      <button onclick="finalStep()">YESSS 😍</button>
+    </div>
+  </div>
+
+  <div class="card hidden" id="step4">
+    <h1>Wise choice 😌💛</h1>
+    <p>You are smart for making a great decision for a third year in a row.</p>
+    <p><strong>I love you so much.</strong></p>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <audio id="jazz" src="https://cdn.pixabay.com/audio/2022/03/15/audio_9f7b5b9a8a.mp3"></audio>
+
+  <script>
+    function nextStep(step) {
+      document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
+      document.getElementById('step' + step).classList.remove('hidden');
+    }
+
+    function finalStep() {
+      document.getElementById('jazz').play();
+      startConfetti();
+      nextStep(4);
+    }
+
+    function startConfetti() {
+      const container = document.getElementById('confetti');
+      const message = ['I','❤️','Y','O','U'];
+      let index = 0;
+
+      setInterval(() => {
+        const piece = document.createElement('span');
+        piece.textContent = message[index % message.length];
+        piece.style.left = Math.random() * window.innerWidth + 'px';
+        piece.style.top = '0px';
+        piece.style.fontSize = '22px';
+        container.appendChild(piece);
+
+        index++;
+        setTimeout(() => piece.remove(), 4000);
+      }, 220);
+    }
+  </script>
+
+</body>
+</html>
